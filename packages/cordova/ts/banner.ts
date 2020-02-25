@@ -25,4 +25,10 @@ export default class Banner extends AdBase {
       { id: this.state.getAdId(adUnitID) },
     ])
   }
+   public move(id: AdUnitIDOption, x: number, y: number) {
+    const adUnitID = this.resolveAdUnitID(id)
+    return execAsync(NativeActions.banner_hide, [
+      { id: this.state.getAdId(adUnitID), x: x, y: y },
+    ])
+  }
 }
