@@ -100,6 +100,25 @@ class AMSPlugin: CDVPlugin {
         let result = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: true)
         self.commandDelegate!.send(result, callbackId: command.callbackId)
     }
+    
+    @objc(banner_move:)
+    func banner_move(command: CDVInvokedUrlCommand) {
+        guard let opts = command.argument(at: 0) as? NSDictionary,
+            let id = opts.value(forKey: "id") as? Int,
+            let pX = opts.value(forKey: "x") as? Int,
+            let pY = opts.value(forKey: "y") as? Int,
+            let banner = AMSAdBase.ads[id] as? AMSBanner
+            else {
+                let result = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: false)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
+                return
+        }
+
+        //banner.move(pX, pY)
+        
+        let result = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: true)
+        self.commandDelegate!.send(result, callbackId: command.callbackId)
+    }
 
     @objc(interstitial_is_loaded:)
     func interstitial_is_loaded(command: CDVInvokedUrlCommand) {
